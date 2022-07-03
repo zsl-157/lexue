@@ -1,0 +1,39 @@
+spring:
+
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      routes:
+        - id: admin
+          uri: lb://admin
+          predicates:
+            - Path=/api/admin/demo/**
+          filters:
+            - StripPrefix=2
+
+        - id: account
+          uri: lb://account
+          predicates:
+            - Path=/api/account/demo/**
+          filters:
+            - StripPrefix=2
+
+        - id: common
+          uri: lb://common
+          predicates:
+            - Path=/api/common/demo/**
+          filters:
+            - StripPrefix=2
+
+        - id: course
+          uri: lb://course
+          predicates:
+            - Path=/api/course/demo/**
+          filters:
+            - StripPrefix=2
+
+
